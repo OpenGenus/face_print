@@ -4,9 +4,15 @@ import lxml
 import os
 import json
 
+Sname=""
+
 def getimgurl(url):
+	global Sname
 	resp=requests.get(url)
 	soup=bs(resp.text,'lxml')
+	tag=soup.find("h1",{"id":"firstHeading"})
+	Sname=tag.text
+	print(Sname)
 	tag=soup.find("a",{"class":"image"})
 	link=""
 	if tag is not None:
@@ -48,14 +54,11 @@ i=1
 for li in imagelistdiv.findAll('li'):
 	temp=li.find("a")
 	link="https://en.wikipedia.org"+temp['href']
-	link.replace(" ","")
-	temp=temp.text
-	temp.replace(" ","")
-	print(temp)
-	data={}
-	data['name']=temp
-	data['wiki_link']=link
+	link.replace("","")
 	img_link=getimgurl(link)
+	data={}
+	data['name']=Sname
+	data['wiki_link']=link
 	if img_link is not None:
 	    img_data = requests.get(img_link).content
 	    file_name=str(i)
