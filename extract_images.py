@@ -3,6 +3,7 @@ import requests
 import lxml
 import os
 import json
+import os.path
 
 Sname=""
 
@@ -31,6 +32,10 @@ def tojson(fileopen,data):
 		f.write("{\"index\":")
 		json.dump(data,f,indent=2)
 		f.write("}")
+
+
+new_path=r'/home/tanmay/Documents/image_ogo/raw_data'
+os.makedirs(new_path)
 
 filejson='image_mapping.json'
 index=[]
@@ -70,6 +75,7 @@ for li in imagelistdiv.findAll('li'):
 	        file_name=file_name+'.gif'
 	    else:
 	    	file_name=file_name+'jpg'
+	    file_name="raw_data/"+file_name
 	    with open(file_name, 'wb') as handler:
 		    handler.write(img_data)
 	    data['image_file']=file_name
@@ -77,8 +83,6 @@ for li in imagelistdiv.findAll('li'):
 		data['image_file']="not found"
 	index.append(data)
 	i=i+1
-	if i==51:
-		break
 
 tojson(filejson,index)
 os.remove("out.html")
