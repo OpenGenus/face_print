@@ -28,8 +28,8 @@ def tojson(fileopen,data):
 		json.dump(data,f,indent=2)
 		f.write("}")
 
-
-new_path=r'/home/tanmay/Documents/image_ogo/raw_data_winner'
+new_path = os.path.dirname(os.path.realpath(__file__))
+new_path=new_path+'/raw_data_winner'
 os.makedirs(new_path)
 
 filejson='raw_data_winner/image_mapping_winner.json'
