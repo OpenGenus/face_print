@@ -34,10 +34,11 @@ def tojson(fileopen,data):
 		f.write("}")
 
 
-new_path=r'/home/tanmay/Documents/image_ogo/raw_data'
+new_path = os.path.dirname(os.path.realpath(__file__))
+new_path=new_path+'/raw_data'
 os.makedirs(new_path)
 
-filejson='image_mapping.json'
+filejson='raw_data/image_mapping.json'
 index=[]
 
 url="https://en.wikipedia.org/wiki/List_of_computer_scientists"
